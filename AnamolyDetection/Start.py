@@ -9,8 +9,6 @@ def yarn_job():
     train = sqlContext.read.format('com.databricks.spark.csv').options(header='true', inferschema='true').load('data/train.csv')
     train.registerTempTable("train")
     sqlContext.sql("select v22,count(target) from train group by v22").show()
-    print "Successfully launched PySpark, Press Enter to Finish the Session:"
-    raw_input()
 
 if __name__ == "__main__":
     spark_home = os.environ.get("SPARK_HOME")
@@ -19,4 +17,6 @@ if __name__ == "__main__":
     sys.path.insert(0, os.path.join(spark_home, "python/lib/py4j-0.8.2.1-src.zip"))
     execfile(os.path.join(spark_home, "python/pyspark/shell.py"))
     yarn_job()
+    print "Successfully launched PySpark, Press Enter to Finish the Session:"
+    raw_input()
 
